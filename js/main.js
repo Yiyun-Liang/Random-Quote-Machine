@@ -72,6 +72,6 @@ function tweetQuote(){
 
 $(document).ready(function(){
   getNewQuote();
-  $(".new-quote").on('click', getNewQuote);
-  $(".tweet-quote").on('click', tweetQuote);
+  $("#new-quote").on('click', getNewQuote);
+  $("#tweet-quote").on('click', tweetQuote);
 });
