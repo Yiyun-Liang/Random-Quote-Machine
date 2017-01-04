@@ -1,14 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  vertical-align: baseline;
-}
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 
 body {
   background-color: grey;
   color: grey;
-  font-family: monospace;
+  font-family: "Raleway", monospace;
   font-weight: 400;
 }
 
