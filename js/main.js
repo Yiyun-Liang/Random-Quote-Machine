@@ -13,15 +13,18 @@ function inIframe(){
 
 function getNewQuote(){
   $.ajax({
-    url: "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
+    url: "http://api.forismatic.com/api/1.0/?",
+    dataType: "jsonp",
+    data: "method=getQuote&format=jsonp&lang=en&jsonp=?",
     success: function(res){
-      var jsonRes = JSON.parse(res);
-      var post = jsonRes.shift();
-      quote = post.content;
-      author = post.title;
+      console.log(res);
+      //var jsonRes = JSON.parse(res);
+      //var post = jsonRes.shift();
+      quote = res.quoteText;
+      author = res.quoteAuthor;
 
       if(inIframe()){
-        $("#tweet-quote").attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
+        $("#tweet-quote").attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + quote + '" ' + author));
       }
 
       $(".quote").animate({
@@ -39,7 +42,7 @@ function getNewQuote(){
         $(this).animate({
           opacity: 1
         }, 500);
-        $(".author").text(author);
+        $("#author").text(author);
       });
 
       var color = Math.floor(Math.random() * colors.length);
@@ -63,7 +66,7 @@ function openUrl(url){
 
 function tweetQuote(){
   if(!inIframe()) {
-    openUrl('https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
+    openUrl('https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + quote + '" ' + author));
   }
 }
 
